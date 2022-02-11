@@ -124,6 +124,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/media/'
+
 AUTH_USER_MODEL = 'users.User'
 
 CORS_ORIGIN_ALLOW_ALL = True

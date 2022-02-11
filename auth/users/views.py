@@ -1,5 +1,6 @@
 from encodings import utf_8
 from urllib import response
+from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -7,6 +8,8 @@ from .serializers import UserSerializer
 from users.models import User
 from rest_framework.exceptions import AuthenticationFailed
 import jwt, datetime
+import os
+from django.conf import settings
 
 # Create your views here.
 
@@ -60,11 +63,10 @@ class UserView(APIView):
             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
 
         except jwt.ExpiredSignatureError:
-            raise AuthenticationFailed('Unauthenticated user!')
+            raise AuthenticationFailed('Token Expire, please login again')
 
         user = User.objects.filter(id=payload['id']).first()
         serializer = UserSerializer(user)
-
         return Response(serializer.data)
 
 class LogoutView(APIView):
@@ -80,3 +82,10 @@ class LogoutView(APIView):
 
 def home(request):
     return render(request, 'users/home.html')
+
+def testing(request, filename):
+    f = open(settings.BASE_DIR+settings.MEDIA_ROOT+filename, 'r')
+    file_content = f.read()
+    f.close()
+    return HttpResponse(file_content, content_type="text/plain")
+ 
