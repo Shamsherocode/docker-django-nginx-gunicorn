@@ -17,9 +17,17 @@ services:
       - static:/static
       - /data/certs:/etc/nginx/certs
     ports:
-      - "80:80"
+      - 80:80
+      - 443:443
     depends_on:
       - django_gunicorn
+    
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
 
 volumes:
   static:
