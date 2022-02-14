@@ -4,10 +4,10 @@ Requires=gunicorn.socket
 After=network.target
 
 [Service]
-User=harry
+User=shamsher
 Group=www-data
-WorkingDirectory=/home/api/auth
-ExecStart=/home/api/auth/env/bin/gunicorn \
+WorkingDirectory=/app
+ExecStart=/app/gunicorn \
           --access-logfile - \
           --workers 3 \
           --bind unix:/run/gunicorn.sock \
