@@ -4,9 +4,9 @@ FROM nginx:1.19.0-alpine
 # COPY  ./private.key /etc/nginx/ssl/private/private.key
 
 
-RUN sudo apt-get install certbot
+# RUN sudo apt-get install certbot
 
-RUN apt-get install python3-certbot-nginx
+# RUN apt-get install python3-certbot-nginx
 
 CMD certbot --nginx -d api.psd2htmlx.com -d www.api.psd2htmlx.com
 
