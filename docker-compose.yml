@@ -13,6 +13,7 @@ services:
 
   nginx:
     build: ./nginx
+    restart: always
     volumes:
       - static:/static
     ports:
@@ -21,5 +22,11 @@ services:
     depends_on:
       - django_gunicorn
 
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #     - "/var/lib/letsencrypt:/var/lib/letsencrypt"
+  #     - "/etc/letsencrypt:/etc/letsencrypt"
+  #   command: certbot --nginx -d api.psd2htmlx.com -d www.api.psd2htmlx.com
 volumes:
   static:
